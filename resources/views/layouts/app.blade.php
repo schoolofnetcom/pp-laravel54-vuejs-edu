@@ -12,19 +12,34 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <style type="text/css">
+        @media print {
+            .hidden-print {
+                display: none !important;
+            }
+        }
+    </style>
 </head>
 <body>
 <div id="app">
     @php
         $navbar = Navbar::withBrand(config('app.name'), route('admin.dashboard'))->inverse();
             if(Auth::check()){
-                $arrayLinks = [
-                    ['link' => route('admin.users.index'), 'title' => 'Usuário'],
-                ];
+                if(\Gate::allows('admin')){
+                    $arrayLinks = [
+                        ['link' => route('admin.users.index'), 'title' => 'Usuário'],
+                    ];
+                    $navbar->withContent(Navigation::links($arrayLinks));
+                }
+
                 $arrayLinksRight = [
                     [
                         Auth::user()->name,
                         [
+                            [
+                                'link' => route('admin.users.settings.edit'),
+                                'title' => 'Configurações'
+                            ],
                             [
                                 'link' => route('logout'),
                                 'title' => 'Logout',
@@ -35,8 +50,7 @@
                         ]
                     ]
                 ];
-                $navbar->withContent(Navigation::links($arrayLinks))
-                        ->withContent(Navigation::links($arrayLinksRight)->right());
+                $navbar->withContent(Navigation::links($arrayLinksRight)->right());
 
                $formLogout = FormBuilder::plain([
                     'id' => 'form-logout',
@@ -53,7 +67,7 @@
     @endif
 
     @if(Session::has('message'))
-        <div class="container">
+        <div class="container hidden-print">
             {!! Alert::success(Session::get('message'))->close() !!}
         </div>
     @endif

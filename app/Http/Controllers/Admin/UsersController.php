@@ -54,11 +54,20 @@ class UsersController extends Controller
         }
 
         $data = $form->getFieldValues();
-        $password = str_random(6);
-        $data['password'] = $password;
-        User::create($data);
+        $result = User::createFully($data);
         $request->session()->flash('message','Usuário criado com sucesso');
-        return redirect()->route('admin.users.index');
+        $request->session()->flash('user_created',[
+            'id' => $result['user']->id,
+            'password' => $result['password']
+        ]);
+        return redirect()->route('admin.users.show_details');
+    }
+
+    public function showDetails(){
+        $userData = session('user_created');
+        $user = User::findOrFail($userData['id']);
+        $user->password = $userData['password'];
+        return view('admin.users.show_details',compact('user'));
     }
 
     /**
