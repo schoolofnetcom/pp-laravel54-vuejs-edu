@@ -11,14 +11,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <style type="text/css">
-        @media print {
-            .hidden-print {
-                display: none !important;
-            }
-        }
-    </style>
+    <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
 </head>
 <body>
 <div id="app">
@@ -28,6 +21,8 @@
                 if(\Gate::allows('admin')){
                     $arrayLinks = [
                         ['link' => route('admin.users.index'), 'title' => 'Usuário'],
+                        ['link' => route('admin.subjects.index'), 'title' => 'Disciplina'],
+                        ['link' => route('admin.class_informations.index'), 'title' => 'Turma'],
                     ];
                     $navbar->withContent(Navigation::links($arrayLinks));
                 }
@@ -75,6 +70,6 @@
 </div>
 
 <!-- Scripts -->
-<script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ asset('js/admin.js') }}"></script>
 </body>
 </html>

@@ -39,3 +39,23 @@ $factory->define(\SON\Models\UserProfile::class, function (Faker\Generator $fake
         'state' => collect(\SON\Models\State::$states)->random(),
     ];
 });
+
+$factory->define(\SON\Models\Subject::class, function (Faker\Generator $faker) {
+
+    return [
+        'name' => $faker->word,
+    ];
+});
+
+
+$factory->define(\SON\Models\ClassInformation::class, function (Faker\Generator $faker) {
+
+    return [
+        'date_start' => $faker->date(),
+        'date_end' => $faker->date(),
+        'cycle' => rand(1,8),
+        'subdivision' => rand(1,16),
+        'semester' => rand(1,2),
+        'year' => rand(2017,2030),
+    ];
+});
