@@ -45,7 +45,7 @@ class User extends Authenticatable implements TableInterface
 
     public static function createFully($data){
         $password = str_random(6);
-        $data['password'] = $password;
+        $data['password'] = bcrypt($password);
         /** @var User $user */
         $user = parent::create($data+['enrolment' => str_random(6)]);
         self::assignEnrolment($user,self::ROLE_ADMIN);
