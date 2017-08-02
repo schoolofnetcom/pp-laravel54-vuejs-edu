@@ -169,7 +169,7 @@ return [
         Laravel\Tinker\TinkerServiceProvider::class,
         \Kris\LaravelFormBuilder\FormBuilderServiceProvider::class,
         Bootstrapper\BootstrapperL5ServiceProvider::class,
-
+        \Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
         /*
          * Application Service Providers...
          */

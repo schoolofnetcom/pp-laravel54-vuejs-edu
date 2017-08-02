@@ -6,8 +6,9 @@ use Bootstrapper\Interfaces\TableInterface;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use SON\Notifications\UserCreated;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable implements TableInterface
+class User extends Authenticatable implements TableInterface, JWTSubject
 {
     use Notifiable;
     const ROLE_ADMIN = 1;
@@ -107,5 +108,31 @@ class User extends Authenticatable implements TableInterface
             case 'Email':
                 return $this->email;
         }
+    }
+
+    /**
+     * Get the identifier that will be stored in the subject claim of the JWT.
+     *
+     * @return mixed
+     */
+    public function getJWTIdentifier()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Return a key value array, containing any custom claims to be added to the JWT.
+     *
+     * @return array
+     */
+    public function getJWTCustomClaims()
+    {
+        return [
+            'user' => [
+                'id' => $this->id,
+                'name' => $this->name,
+                'email' => $this->email
+            ]
+        ];
     }
 }

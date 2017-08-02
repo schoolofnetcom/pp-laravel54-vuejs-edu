@@ -3,6 +3,7 @@
 namespace SON\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use Tymon\JWTAuth\Http\Middleware\AuthenticateAndRenew;
 
 class Kernel extends HttpKernel
 {
@@ -56,5 +57,6 @@ class Kernel extends HttpKernel
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \SON\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'auth.renew' => AuthenticateAndRenew::class
     ];
 }
