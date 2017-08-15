@@ -1,4 +1,6 @@
 {
+    "/js/spa.js": "/js/spa.js",
     "/js/admin.js": "/js/admin.js",
-    "/css/admin.css": "/css/admin.css"
+    "/css/admin.css": "/css/admin.css",
+    "/css/spa.css": "/css/spa.css"
 }
