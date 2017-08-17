@@ -1,8 +1,11 @@
 <template src="../templates/menu.html"></template>
 
 <script type="text/javascript">
-    import store from '../../store/store';
+    import authMixin from '../../mixins/auth.mixin';
+    import menuMixin from '../../mixins/menu.mixin';
+
     export default {
+        mixins: [menuMixin],
         data(){
             return {
                 menus: [
@@ -11,16 +14,5 @@
                 brandRouteName: 'class_informations.list'
             }
         },
-        computed: {
-            isAuth(){
-                return store.state.auth.check;
-            },
-            user(){
-                return store.state.auth.user;
-            },
-            username(){
-                return this.isAuth?store.state.auth.user.name:null;
-            }
-        }
     };
 </script>

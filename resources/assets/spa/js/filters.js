@@ -1,0 +1,11 @@
+import Vue from 'vue';
+
+Vue.filter('dateBr', function (value) { //0000-00-00
+    if (value && value.length >= 10) {
+        let dateArray = value.substring(0, 10).split('-');
+        if (dateArray.length === 3) {
+            return dateArray.reverse().join('/');
+        }
+    }
+    return value;
+});

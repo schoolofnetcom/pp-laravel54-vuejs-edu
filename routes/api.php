@@ -26,6 +26,17 @@ Route::group([
         Route::get('/user', function (Request $request) {
             return \Auth::user();
         });
+        Route::group([
+            'prefix' => 'teacher',
+            'as' => 'teacher.',
+            'namespace' => 'Teacher\\',
+            'middleware' => 'can:teacher'
+        ], function(){
+            Route::resource('class_informations', 'ClassInformationsController',['only' => ['index','show']]);
+        });
+    });
+
+    Route::group(['middleware' => 'auth:api'], function () {
         Route::post('/logout', 'AuthController@logout');
     });
 });

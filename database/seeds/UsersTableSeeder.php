@@ -27,10 +27,24 @@ class UsersTableSeeder extends Seeder
             'email' => 'teacher@user.com',
             'enrolment' => 400000
         ])->each(function(User $user){
-            $profile = factory(UserProfile::class)->make();
-            $user->profile()->create($profile->toArray());
-            User::assingRole($user, User::ROLE_TEACHER);
-            $user->save();
+            if(!$user->userable) {
+                $profile = factory(UserProfile::class)->make();
+                $user->profile()->create($profile->toArray());
+                User::assingRole($user, User::ROLE_TEACHER);
+                $user->save();
+            }
+        });
+
+        factory(User::class)->create([
+            'email' => 'student@user.com',
+            'enrolment' => 700000
+        ])->each(function(User $user){
+            if(!$user->userable) {
+                $profile = factory(UserProfile::class)->make();
+                $user->profile()->create($profile->toArray());
+                User::assingRole($user, User::ROLE_STUDENT);
+                $user->save();
+            }
         });
 
         factory(User::class,100)->create()->each(function(User $user){
