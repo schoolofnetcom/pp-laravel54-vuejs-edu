@@ -27,7 +27,7 @@ Vue.http.interceptors.push((request,next) => {
                 return router.push({name: 'login'});
         }
     })
-})
+});
 
 export class Jwt{
     static accessToken(username, password){
@@ -40,7 +40,8 @@ export class Jwt{
 }
 
 const Teacher = {
-    classInformation: Vue.resource('teacher/class_informations/{class_information}')
+    classInformation: Vue.resource('teacher/class_informations/{class_information}'),
+    classTeaching: Vue.resource('teacher/class_teachings/{class_teaching}'),
 };
 
 const Student = {

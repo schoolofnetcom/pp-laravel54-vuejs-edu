@@ -59,3 +59,28 @@ $factory->define(\SON\Models\ClassInformation::class, function (Faker\Generator 
         'year' => rand(2017,2030),
     ];
 });
+
+$factory->define(\SON\Models\ClassTest::class, function (Faker\Generator $faker) {
+
+    return [
+        'date_start' => $faker->dateTimeBetween('now','+1 hour'),
+        'date_end' => $faker->dateTimeBetween('now','+1 hour'),
+        'name' => $faker->sentence(3),
+    ];
+});
+
+$factory->define(\SON\Models\Question::class, function (Faker\Generator $faker) {
+
+    return [
+        'question' => "{$faker->sentence(6)}?",
+        'point' => $faker->randomFloat(2,1,3)
+    ];
+});
+
+
+$factory->define(\SON\Models\QuestionChoice::class, function (Faker\Generator $faker) {
+
+    return [
+        'choice' => $faker->sentence(6)
+    ];
+});

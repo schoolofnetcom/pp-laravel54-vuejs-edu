@@ -9,3 +9,7 @@ Vue.filter('dateBr', function (value) { //0000-00-00
     }
     return value;
 });
+
+Vue.filter('classInformationAlias', function(classInformation){
+    return `${classInformation.cycle}.${classInformation.subdivision}.${classInformation.semester}.${classInformation.year}`;
+})
