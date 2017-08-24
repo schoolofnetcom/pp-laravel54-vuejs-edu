@@ -2,6 +2,7 @@
 
 namespace SON\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class ClassTest extends Model
@@ -30,39 +31,45 @@ class ClassTest extends Model
         });
     }
 
-    protected function deleteQuestions(){
-        foreach ($this->questions()->get() as $question){
+    protected function deleteQuestions()
+    {
+        foreach ($this->questions()->get() as $question) {
             $question->choices()->delete();
             $question->delete();
         }
     }
 
-    protected static function createQuestion($question){
+    protected static function createQuestion($question)
+    {
         /** @var Question $newQuestion */
         $newQuestion = Question::create($question);
-        foreach ($question['choices'] as $choice){
+        foreach ($question['choices'] as $choice) {
+            $choice['true'] = $choice['true'] !== false ? true : false;
             $newQuestion->choices()->create($choice);
         }
     }
 
-    public static function createFully(array $data){
+    public static function createFully(array $data)
+    {
         $classTest = self::create($data);
-        foreach ($data['questions'] as $question){
-            self::createQuestion($question+['class_test_id' => $classTest->id]);
+        foreach ($data['questions'] as $question) {
+            self::createQuestion($question + ['class_test_id' => $classTest->id]);
         }
         return $classTest;
     }
 
-    public function updateFully(array $data){
+    public function updateFully(array $data)
+    {
         $this->update($data);
         $this->deleteQuestions();
-        foreach ($data['questions'] as $question){
-            self::createQuestion($question+['class_test_id' => $this->id]);
+        foreach ($data['questions'] as $question) {
+            self::createQuestion($question + ['class_test_id' => $this->id]);
         }
         return $this;
     }
 
-    public function deleteFully(){
+    public function deleteFully()
+    {
         $this->deleteQuestions();
         $this->delete();
     }
@@ -70,7 +77,11 @@ class ClassTest extends Model
     public function toArray()
     {
         $data = parent::toArray();
-        $data['questions'] = $this->questions;
+        $data['date_start'] = (new Carbon($this->date_start))->format('Y-m-d\TH:i');
+        $data['date_end'] = (new Carbon($this->date_end))->format('Y-m-d\TH:i');
+        $data['total_questions'] = $this->questions()->getQuery()->count();
+        $data['total_points'] = $this->questions()->getQuery()->sum('point');
+        //$data['questions'] = $this->questions;
         return $data;
     }
 

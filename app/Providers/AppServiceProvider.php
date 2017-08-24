@@ -17,6 +17,13 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         \Schema::defaultStringLength(191);
+        \Validator::extend('choice_true', function($attribute,$value,$parameters,$validator){
+           $items = collect($value)->filter(function($item){
+              return isset($item['true']) && $item['true']!== false;
+           });
+
+           return $items->count() === 1;
+        });
     }
 
     /**

@@ -42,6 +42,7 @@ export class Jwt{
 const Teacher = {
     classInformation: Vue.resource('teacher/class_informations/{class_information}'),
     classTeaching: Vue.resource('teacher/class_teachings/{class_teaching}'),
+    classTest: Vue.resource('teacher/class_teachings/{class_teaching}/class_tests/{class_test}')
 };
 
 const Student = {

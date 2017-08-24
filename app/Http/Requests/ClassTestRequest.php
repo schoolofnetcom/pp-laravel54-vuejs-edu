@@ -37,7 +37,7 @@ class ClassTestRequest extends FormRequest
             'questions' => 'required|array',
             'questions.*.question' => 'required',
             'questions.*.point' => 'required|numeric',
-            'questions.*.choices' => 'required|array',
+            'questions.*.choices' => 'required|array|choice_true',
             'questions.*.choices.*.choice' => 'required',
         ];
     }

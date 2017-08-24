@@ -11,4 +11,8 @@ class QuestionChoice extends Model
         'true',
         'question_id'
     ];
+
+    protected $casts = [
+        'true' => 'boolean'
+    ];
 }
