@@ -1,6 +1,10 @@
 {
     "/js/spa.js": "/js/spa.js",
+    "/js/spa.js.map": "/js/spa.js.map",
     "/js/admin.js": "/js/admin.js",
     "/css/admin.css": "/css/admin.css",
-    "/css/spa.css": "/css/spa.css"
+    "/css/spa.css": "/css/spa.css",
+    "/js/admin.js.map": "/js/admin.js.map",
+    "/css/admin.css.map": "/css/admin.css.map",
+    "/css/spa.css.map": "/css/spa.css.map"
 }
