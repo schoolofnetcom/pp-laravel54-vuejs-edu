@@ -1,9 +1,11 @@
 import {Jwt} from './resources';
 import LocalStorage from './localstorage';
+import {Buffer} from 'buffer/';
 
 const payloadToObject = (token) => {
     let payload = token.split('.')[1];
-    return JSON.parse(atob(payload));
+    //return JSON.parse(atob(payload));
+    return JSON.parse(Buffer.from(payload,'base64').toString());
 };
 
 const TOKEN = 'token'
