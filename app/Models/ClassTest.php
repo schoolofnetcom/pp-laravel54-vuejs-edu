@@ -31,6 +31,17 @@ class ClassTest extends Model
         });
     }
 
+    public function scopeByStudent($query, $studentId)
+    {
+        return $query->whereHas('classTeaching', function ($query) use ($studentId) {
+            $query->whereHas('classInformation', function ($query) use ($studentId) {
+                $query->whereHas('students', function ($query) use ($studentId) {
+                    $query->where('student_id',$studentId);
+                });
+            });
+        });
+    }
+
     protected function deleteQuestions()
     {
         foreach ($this->questions()->get() as $question) {
@@ -72,6 +83,11 @@ class ClassTest extends Model
     {
         $this->deleteQuestions();
         $this->delete();
+    }
+
+    public static function greatherDateEnd30Minutes($dateEnd){
+        $dateEnd = (new Carbon($dateEnd))->addMinutes(30);
+        return (new Carbon())->greaterThanOrEqualTo($dateEnd);
     }
 
     public function toArray()

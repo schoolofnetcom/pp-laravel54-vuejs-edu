@@ -25,6 +25,7 @@ Route::group([
         Route::get('/user', function (Request $request) {
             return \Auth::user();
         });
+
         Route::group([
             'prefix' => 'teacher',
             'as' => 'teacher.',
@@ -36,6 +37,24 @@ Route::group([
             });
             Route::resource('class_informations', 'ClassInformationsController', ['only' => ['index', 'show']]);
             Route::resource('class_teachings', 'ClassTeachingsController', ['only' => ['index', 'show']]);
+        });
+
+        Route::group([
+            'prefix' => 'student',
+            'as' => 'student.',
+            'namespace' => 'Student\\',
+            'middleware' => 'can:student'
+        ], function () {
+            Route::group(['prefix' => 'class_informations/{class_information}', 'as' => 'class_informations.'], function(){
+                Route::resource('class_teachings', 'ClassTeachingsController', ['only' => ['index', 'show']]);
+            });
+            Route::group(['prefix' => 'class_teachings/{class_teaching}', 'as' => 'class_teachings.'], function () {
+                Route::resource('class_tests', 'ClassTestsController', ['only' => ['index', 'show']]);
+            });
+            Route::group(['prefix' => 'class_tests/{class_test}', 'as' => 'class_tests.'], function () {
+                Route::resource('do', 'StudentClassTestsController', ['only' => ['show','store']]);
+            });
+            Route::resource('class_informations', 'ClassInformationsController', ['only' => ['index', 'show']]);
         });
     });
 

@@ -38,7 +38,7 @@ class ClassTestsTableSeeder extends Seeder
                     $classTeaching = $classTeachings->random();
                     $model->classTeaching()->associate($classTeaching);
                     $model->save();
-
+                    $self->createQuestions($model);
                 }
             });
     }

@@ -9,9 +9,9 @@
         data(){
             return {
                 menus: [
-                    {name: "Minhas turmas", routeName: 'teacher.class_teachings.list'}
+                    {name: "Minhas turmas", routeName: 'student.class_informations.list'}
                 ],
-                brandRouteName: 'teacher.class_teachings.list'
+                brandRouteName: 'student.class_informations.list'
             }
         },
     };

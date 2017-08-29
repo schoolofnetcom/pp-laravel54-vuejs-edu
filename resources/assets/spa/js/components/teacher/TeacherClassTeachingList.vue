@@ -19,7 +19,7 @@
                     <td>{{classTeaching.class_information | classInformationAlias}}</td>
                     <td>{{classTeaching.subject.name}}</td>
                     <td>
-                        <router-link :to="{name: 'class_tests.list', params: {class_teaching: classTeaching.id} }">
+                        <router-link :to="{name: 'teacher.class_tests.list', params: {class_teaching: classTeaching.id} }">
                             Avaliações
                         </router-link>
                     </td>

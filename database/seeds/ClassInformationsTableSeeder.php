@@ -21,7 +21,7 @@ class ClassInformationsTableSeeder extends Seeder
                 $studentsCol = $students->random(10);
                 $model->students()->attach($studentsCol->pluck('id'));
 
-                $teaching = rand(3,6);
+                $teaching = rand(3,9);
 
                 $teachersCol = $teachers->random($teaching);
                 $subjectsCol = $subjects->random($teaching);

@@ -41,6 +41,9 @@
     export default {
         mixins: [classInformationMixin],
         computed: {
+            storeType() {
+                return 'teacher';
+            },
             classTest() {
                 return this.$deepModel('teacher.classTest.classTest');
             },
@@ -48,8 +51,8 @@
         mounted() {
             let classTeachingId = this.$route.params.class_teaching;
             store.dispatch('teacher/classTeaching/get', classTeachingId);
-            if(this.$route.name == 'class_tests.update_data'){
-                store.dispatch('teacher/classTest/get',{
+            if (this.$route.name == 'teacher.class_tests.update_data') {
+                store.dispatch('teacher/classTest/get', {
                     classTeachingId: this.$route.params.class_teaching,
                     classTestId: this.$route.params.class_test
                 })
@@ -59,7 +62,7 @@
             goToQuestions() {
                 this.$router.push(
                     {
-                        name: 'class_tests.questions',
+                        name: 'teacher.class_tests.questions',
                         params: {
                             class_teaching: this.$route.params.class_teaching,
                             class_test: this.$route.params.class_test

@@ -36,27 +36,30 @@ class User extends Authenticatable implements TableInterface, JWTSubject
         'remember_token',
     ];
 
-    public function profile(){
+    public function profile()
+    {
         return $this->hasOne(UserProfile::class)->withDefault();
     }
 
-    public function userable(){
+    public function userable()
+    {
         return $this->morphTo();
     }
 
-    public static function createFully($data){
+    public static function createFully($data)
+    {
         $password = str_random(6);
         $data['password'] = bcrypt($password);
         /** @var User $user */
-        $user = parent::create($data+['enrolment' => str_random(6)]);
-        self::assignEnrolment($user,self::ROLE_ADMIN);
-        self::assingRole($user,$data['type']);
+        $user = parent::create($data + ['enrolment' => str_random(6)]);
+        self::assignEnrolment($user, self::ROLE_ADMIN);
+        self::assingRole($user, $data['type']);
         $user->save();
-        if(isset($data['send_mail'])){
+        if (isset($data['send_mail'])) {
             $token = \Password::broker()->createToken($user);
             $user->notify(new UserCreated($token));
         }
-        return compact('user','password');
+        return compact('user', 'password');
     }
 
     public static function assignEnrolment(User $user, $type)
@@ -70,7 +73,8 @@ class User extends Authenticatable implements TableInterface, JWTSubject
         return $user->enrolment;
     }
 
-    public static function assingRole(User $user, $type){
+    public static function assingRole(User $user, $type)
+    {
         $types = [
             self::ROLE_ADMIN => Admin::class,
             self::ROLE_TEACHER => Teacher::class,
@@ -131,7 +135,8 @@ class User extends Authenticatable implements TableInterface, JWTSubject
             'user' => [
                 'id' => $this->id,
                 'name' => $this->name,
-                'email' => $this->email
+                'email' => $this->email,
+                'role' => $this->userable instanceof Teacher ? self::ROLE_TEACHER : self::ROLE_STUDENT
             ]
         ];
     }

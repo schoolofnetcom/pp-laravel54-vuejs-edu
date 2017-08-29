@@ -38,6 +38,9 @@
         },
         mixins: [classInformationMixin],
         computed: {
+            storeType() {
+                return 'teacher';
+            },
             classTest() {
                 return this.$deepModel('teacher.classTest.classTest');
             },
@@ -64,7 +67,7 @@
                         type: 'success'
                     });
                     this.$router.push({
-                        name: 'class_tests.list',
+                        name: 'teacher.class_tests.list',
                         params: {
                             class_teaching: classTeachingId
                         }

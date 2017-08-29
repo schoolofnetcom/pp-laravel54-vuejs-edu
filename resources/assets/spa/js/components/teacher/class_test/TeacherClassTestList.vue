@@ -51,12 +51,15 @@
     export default {
         mixins: [classInformationMixin],
         computed: {
+            storeType() {
+                return 'teacher';
+            },
             classTests() {
                 return store.state.teacher.classTest.classTests;
             },
             routeClassTestCreate(){
                 return {
-                    name: 'class_tests.create_data',
+                    name: 'teacher.class_tests.create_data',
                     params: {
                         'class_teaching': this.$route.params.class_teaching
                     }
@@ -71,7 +74,7 @@
         methods: {
             routeClassTestEdit(classTestId){
                 return {
-                    name: 'class_tests.update_data',
+                    name: 'teacher.class_tests.update_data',
                     params: {
                         class_teaching: this.$route.params.class_teaching,
                         class_test: classTestId
