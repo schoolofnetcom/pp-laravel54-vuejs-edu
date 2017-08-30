@@ -21,6 +21,7 @@
     "lodash": "^4.17.4",
     "moment": "^2.18.1",
     "pnotify": "^3.2.0",
+    "scriptjs": "^2.5.8",
     "select2": "^4.0.3",
     "vue": "^2.1.10",
     "vue-deepset": "^0.5.1",

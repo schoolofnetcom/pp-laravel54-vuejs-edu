@@ -87,7 +87,7 @@ export default [
             {
                 name: 'student.class_tests.list',
                 path: 'classes/:class_information/teachings/:class_teaching/tests',
-                component: require('./components/Student/class_test/StudentClassTestList.vue'),
+                component: require('./components/student/class_test/StudentClassTestList.vue'),
                 meta: {
                     auth: true
                 }
@@ -95,7 +95,15 @@ export default [
             {
                 name: 'student.class_tests.do',
                 path: 'classes/:class_information/teachings/:class_teaching/tests/:class_test/do/:student_class_test?',
-                component: require('./components/Student/class_test/StudentClassTestDo.vue'),
+                component: require('./components/student/class_test/StudentClassTestDo.vue'),
+                meta: {
+                    auth: true
+                }
+            },
+            {
+                name: 'student.chart.per_subject',
+                path: 'classes/:class_information/teachings/:class_teaching/charts/per_subject',
+                component: require('./components/student/chart/StudentChartPerSubject.vue'),
                 meta: {
                     auth: true
                 }
