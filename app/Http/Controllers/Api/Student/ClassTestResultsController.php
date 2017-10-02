@@ -14,7 +14,7 @@ class ClassTestResultsController extends Controller
         $sumClassTestPoints = "(select sum(questions.point) from questions where questions.class_test_id = class_tests.id)";
         $selects = [
             'student_class_tests.created_at',
-            "(student_class_tests.`point`/$sumClassTestPoints)*100 as percentage"
+            "(student_class_tests.point/$sumClassTestPoints)*100 as percentage"
         ];
         $results = \DB::table('student_class_tests')
             ->selectRaw(implode(',', $selects))
