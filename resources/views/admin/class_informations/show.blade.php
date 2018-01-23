@@ -5,8 +5,8 @@
         <div class="row">
             <h3>Ver turma</h3>
             @php
-                $linkEdit = route('admin.class_students.edit',['class_students' => $class_student->id]);
-                $linkDelete = route('admin.class_students.destroy',['class_students' => $class_student->id]);
+                $linkEdit = route('admin.class_students.edit',['class_students' => $class_information->id]);
+                $linkDelete = route('admin.class_students.destroy',['class_students' => $class_information->id]);
             @endphp
             {!! Button::primary(Icon::pencil().' Editar')->asLinkTo($linkEdit) !!}
             {!!
@@ -29,27 +29,27 @@
                 <tbody>
                 <tr>
                     <th scope="row">ID</th>
-                    <td>{{$class_student->id}}</td>
+                    <td>{{$class_information->id}}</td>
                 </tr>
                 <tr>
                     <th scope="row">Data Início</th>
-                    <td>{{$class_student->date_start->format('d/m/Y')}}</td>
+                    <td>{{$class_information->date_start->format('d/m/Y')}}</td>
                 </tr>
                 <tr>
                     <th scope="row">Data Fim</th>
-                    <td>{{$class_student->date_start->format('d/m/Y')}}</td>
+                    <td>{{$class_information->date_start->format('d/m/Y')}}</td>
                 </tr>
                 <tr>
                     <th scope="row">Ciclo</th>
-                    <td>{{$class_student->cycle}}</td>
+                    <td>{{$class_information->cycle}}</td>
                 </tr>
                 <tr>
                     <th scope="row">Subdivisão</th>
-                    <td>{{$class_student->subdivision}}</td>
+                    <td>{{$class_information->subdivision}}</td>
                 </tr>
                 <tr>
                     <th scope="row">Semester</th>
-                    <td>{{$class_student->year}}</td>
+                    <td>{{$class_information->year}}</td>
                 </tr>
                 </tbody>
             </table>
