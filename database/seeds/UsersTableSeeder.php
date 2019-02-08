@@ -19,7 +19,7 @@ class UsersTableSeeder extends Seeder
         ])->each(function(User $user){
             $profile = factory(UserProfile::class)->make();
             $user->profile()->create($profile->toArray());
-            User::assingRole($user, User::ROLE_ADMIN);
+            User::assignRole($user, User::ROLE_ADMIN);
             $user->save();
         });
 
@@ -30,7 +30,7 @@ class UsersTableSeeder extends Seeder
             if(!$user->userable) {
                 $profile = factory(UserProfile::class)->make();
                 $user->profile()->create($profile->toArray());
-                User::assingRole($user, User::ROLE_TEACHER);
+                User::assignRole($user, User::ROLE_TEACHER);
                 $user->save();
             }
         });
@@ -42,7 +42,7 @@ class UsersTableSeeder extends Seeder
             if(!$user->userable) {
                 $profile = factory(UserProfile::class)->make();
                 $user->profile()->create($profile->toArray());
-                User::assingRole($user, User::ROLE_STUDENT);
+                User::assignRole($user, User::ROLE_STUDENT);
                 $user->save();
             }
         });
@@ -51,7 +51,7 @@ class UsersTableSeeder extends Seeder
             if(!$user->userable) {
                 $profile = factory(UserProfile::class)->make();
                 $user->profile()->create($profile->toArray());
-                User::assingRole($user, User::ROLE_TEACHER);
+                User::assignRole($user, User::ROLE_TEACHER);
                 User::assignEnrolment(new User(), User::ROLE_TEACHER);
                 $user->save();
             }
@@ -61,7 +61,7 @@ class UsersTableSeeder extends Seeder
             if(!$user->userable) {
                 $profile = factory(UserProfile::class)->make();
                 $user->profile()->create($profile->toArray());
-                User::assingRole($user, User::ROLE_STUDENT);
+                User::assignRole($user, User::ROLE_STUDENT);
                 User::assignEnrolment(new User(), User::ROLE_STUDENT);
                 $user->save();
             }
